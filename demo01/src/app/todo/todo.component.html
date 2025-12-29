@@ -1,16 +1,50 @@
-<div class="todo-container">
+<div class="container-fluid todo-container">
+
   <h2>Todo List</h2>
   
-  <div class="add-todo">
-    <input 
-      [(ngModel)]="newTodo" 
-      (keyup.enter)="addTodo()" 
-      placeholder="Add new todo..."
-      class="todo-input">
-    <button (click)="addTodo()" class="add-btn">Add</button>
+  <form ngForm="todoForm">
+    <div class="row">
+      <div class="col-md-3">
+        <input 
+          [(ngModel)]="todoForm.name" 
+          placeholder="type name"
+          class="w-ful form-control">
+      </div>
+      <div class="col-md-3">
+        <input 
+          [(ngModel)]="todoForm.email" 
+          placeholder="type email"
+          class="w-ful form-control">
+      </div>
+      <div class="col-md-3">
+        <input 
+          [(ngModel)]="todoForm.message" 
+          placeholder="type text"
+          class="w-ful form-control">
+      </div>
+      <div class="col-md-1">
+        <button (click)="addTodo()" class="add-btn">Add</button>
+      </div>
+    </div>
+  </form>
+
+  <div class="row mt-2" *ngFor="let todo of todos" [class.completed]="todo.completed">
+    <div class="col-md-3">
+      {{ todo.name }}
+    </div>
+    <div class="col-md-3">
+      {{ todo.email }}
+    </div>
+    <div class="col-md-4">
+      {{ todo.message }}
+    </div>
+    <div class="col-md-2">
+      <button (click)="deleteTodo(todo.id)" class="btn btn-warning btn-sm me-2">Edit</button>
+      <button (click)="deleteTodo(todo.id)" class="btn btn-danger btn-sm">Delete</button>
+    </div>
   </div>
 
-  <ul class="todo-list">
+  <!-- <ul class="todo-list">
     <li *ngFor="let todo of todos" class="todo-item" [class.completed]="todo.completed">
       <input 
         type="checkbox" 
@@ -19,5 +53,5 @@
       <span class="todo-text">{{ todo.text }}</span>
       <button (click)="deleteTodo(todo.id)" class="delete-btn">Delete</button>
     </li>
-  </ul>
+  </ul> -->
 </div>
