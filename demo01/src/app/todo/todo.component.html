@@ -7,30 +7,35 @@
       <div class="col-md-3">
         <input 
           [(ngModel)]="todoForm.name" 
+          name="name"
           placeholder="type name"
           class="w-ful form-control">
       </div>
       <div class="col-md-3">
         <input 
           [(ngModel)]="todoForm.email" 
+          name="email"
           placeholder="type email"
           class="w-ful form-control">
       </div>
       <div class="col-md-3">
         <input 
           [(ngModel)]="todoForm.message" 
+          name="message"
           placeholder="type text"
           class="w-ful form-control">
       </div>
       <div class="col-md-1">
-        <button (click)="addTodo()" class="add-btn">Add</button>
+        <button (click)="addTodo()" class="add-btn">
+          {{ isEdit ? 'Update' : 'Add' }} 
+        </button>
       </div>
     </div>
   </form>
 
-  <div class="row mt-2" *ngFor="let todo of todos" [class.completed]="todo.completed">
+  <div class="row mt-2" *ngFor="let todo of todos; let i = index; " [class.completed]="todo.completed">
     <div class="col-md-3">
-      {{ todo.name }}
+      {{ todo.id }}.  {{ todo.name }}
     </div>
     <div class="col-md-3">
       {{ todo.email }}
@@ -39,8 +44,8 @@
       {{ todo.message }}
     </div>
     <div class="col-md-2">
-      <button (click)="deleteTodo(todo.id)" class="btn btn-warning btn-sm me-2">Edit</button>
-      <button (click)="deleteTodo(todo.id)" class="btn btn-danger btn-sm">Delete</button>
+      <button (click)="editTodo(i)" class="btn btn-warning btn-sm me-2">Edit</button>
+      <button (click)="deleteTodo(i)" class="btn btn-danger btn-sm">Delete</button>
     </div>
   </div>
 
