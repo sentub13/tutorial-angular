@@ -4,21 +4,21 @@
   
   <form ngForm="todoForm">
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-2">
         <input 
           [(ngModel)]="todoForm.name" 
           name="name"
           placeholder="type name"
           class="w-ful form-control">
       </div>
-      <div class="col-md-3">
+      <div class="col-md-2">
         <input 
           [(ngModel)]="todoForm.email" 
           name="email"
           placeholder="type email"
           class="w-ful form-control">
       </div>
-      <div class="col-md-3">
+      <div class="col-md-2">
         <input 
           [(ngModel)]="todoForm.message" 
           name="message"
@@ -29,6 +29,14 @@
         <button (click)="addTodo()" class="add-btn">
           {{ isEdit ? 'Update' : 'Add' }} 
         </button>
+      </div>
+      <div class="col-md-3 offset-md-2">
+        <input 
+          [(ngModel)]="searchString" 
+          name="search"
+          placeholder="Search todos..."
+          (input)="searchTodo()"
+          class="w-ful form-control">
       </div>
     </div>
   </form>

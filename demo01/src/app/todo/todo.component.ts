@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 export class TodoComponent {
   isEdit = false;
   editedIndex = -1;
+  searchString = '';
   todoForm = {
     id: 0,
     name: '',
@@ -46,13 +47,6 @@ export class TodoComponent {
             message: this.todoForm.message.trim(),
             completed: this.todoForm.completed
           }
-          // this.todos[this.editedIndex] = {
-          //   id: this.todoForm.id,
-          //   name: this.todoForm.name.trim(),
-          //   email: this.todoForm.email.trim(),
-          //   message: this.todoForm.message.trim(),
-          //   completed: this.todoForm.completed
-          // };
         }
         this.isEdit = false;
       } else {
@@ -67,10 +61,6 @@ export class TodoComponent {
       }
       this.resetForm();
     }
-  }
-
-  toggleTodo(todo: any) {
-    todo.completed = !todo.completed;
   }
 
   editTodo (index:number) {
@@ -91,4 +81,15 @@ export class TodoComponent {
     // deleteTodo.todos = this.todos.filter(todo => todo.id !== id);
     this.todos.splice(index, 1);
   }
+  
+  searchTodo() {
+    console.log("searchString----", this.searchString);
+    const searchLower = this.searchString.toLowerCase();
+    return this.todos.filter(todo => 
+      todo.name.toLowerCase().includes(searchLower) || 
+      todo.email.toLowerCase().includes(searchLower) || 
+      todo.message.toLowerCase().includes(searchLower)
+    );
+  }
+
 }
