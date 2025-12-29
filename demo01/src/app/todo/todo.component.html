@@ -41,7 +41,7 @@
     </div>
   </form>
 
-  <div class="row mt-2" *ngFor="let todo of todos; let i = index; " [class.completed]="todo.completed">
+  <div class="row mt-2" *ngFor="let todo of filteredTodos(); let i = index; " [class.completed]="todo.completed">
     <div class="col-md-3">
       {{ todo.id }}.  {{ todo.name }}
     </div>

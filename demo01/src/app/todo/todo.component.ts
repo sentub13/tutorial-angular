@@ -82,14 +82,20 @@ export class TodoComponent {
     this.todos.splice(index, 1);
   }
   
-  searchTodo() {
-    console.log("searchString----", this.searchString);
+  filteredTodos() {
+    if (!this.searchString) {
+      return this.todos;
+    } 
     const searchLower = this.searchString.toLowerCase();
     return this.todos.filter(todo => 
       todo.name.toLowerCase().includes(searchLower) || 
       todo.email.toLowerCase().includes(searchLower) || 
       todo.message.toLowerCase().includes(searchLower)
     );
+  }
+  
+  searchTodo() {
+   
   }
 
 }
