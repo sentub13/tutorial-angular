@@ -81,12 +81,21 @@ export class TodoComponent {
     // deleteTodo.todos = this.todos.filter(todo => todo.id !== id);
     this.todos.splice(index, 1);
   }
+
+  filteredTodos () {
+    if (!this.searchString) {
+      return this.todos;
+   } else {
+      const str = this.searchString.toLowerCase();
+      return this.todos.filter(todo => todo.name.toLowerCase().includes(str));
+    }
+  }
   
-  filteredTodos() {
+  filteredTodosBk() {
     if (!this.searchString) {
       return this.todos;
     } 
-    const searchLower = this.searchString.toLowerCase();
+    const searchLower = this.searchString.toLowerCase();    
     return this.todos.filter(todo => 
       todo.name.toLowerCase().includes(searchLower) || 
       todo.email.toLowerCase().includes(searchLower) || 
