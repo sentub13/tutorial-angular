@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 })
 export class TodoComponent {
   isEdit = false;
+  editedIndex = -1;
   todoForm = {
     id: 0,
     name: '',
@@ -33,13 +34,37 @@ export class TodoComponent {
   addTodo() {
     console.log("todoForm----", this.todoForm)
     if (this.isFormValid()) {
-      this.todos.push({
-        id: Math.round(Math.random()),
-        name: this.todoForm.name.trim(),
-        email: this.todoForm.email.trim(),
-        message: this.todoForm.message.trim(),
-        completed: false
-      });     
+      if (this.isEdit) {
+        // Update existing todo
+        const index = this.todos.findIndex(todo => todo.id === this.todoForm.id);
+        console.log("index---", index)
+        if (this.editedIndex !== -1) {
+          this.todos[this.editedIndex] = {
+            id: this.todoForm.id,
+            name: this.todoForm.name.trim(),
+            email: this.todoForm.email.trim(),
+            message: this.todoForm.message.trim(),
+            completed: this.todoForm.completed
+          }
+          // this.todos[this.editedIndex] = {
+          //   id: this.todoForm.id,
+          //   name: this.todoForm.name.trim(),
+          //   email: this.todoForm.email.trim(),
+          //   message: this.todoForm.message.trim(),
+          //   completed: this.todoForm.completed
+          // };
+        }
+        this.isEdit = false;
+      } else {
+        // Add new todo
+        this.todos.push({
+          id: Math.round(Math.random() * 10000),
+          name: this.todoForm.name.trim(),
+          email: this.todoForm.email.trim(),
+          message: this.todoForm.message.trim(),
+          completed: false
+        });
+      }
       this.resetForm();
     }
   }
@@ -50,6 +75,7 @@ export class TodoComponent {
 
   editTodo (index:number) {
     this.isEdit = true;
+    this.editedIndex = index;
     let selected = this.todos[index];
     console.log("selected----", selected);
     this.todoForm = {
